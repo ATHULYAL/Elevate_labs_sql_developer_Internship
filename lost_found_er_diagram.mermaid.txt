@@ -1,0 +1,51 @@
+-- Create the Users table
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    role VARCHAR(20) NOT NULL CHECK (role IN ('student', 'staff'))
+);
+
+-- Create the Categories table
+CREATE TABLE Categories (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Create the Lost_Items table
+CREATE TABLE Lost_Items (
+    lost_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    category_id INT,
+    item_name VARCHAR(100),
+    description TEXT,
+    date_lost DATE NOT NULL,
+    location VARCHAR(100),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+);
+
+-- Create the Found_Items table
+CREATE TABLE Found_Items (
+    found_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    category_id INT,
+    item_name VARCHAR(100),
+    description TEXT,
+    date_found DATE NOT NULL,
+    location VARCHAR(100),
+    is_claimed BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+);
+
+-- Create the Claims table
+CREATE TABLE Claims (
+    claim_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    found_id INT,
+    claim_date DATE DEFAULT (CURDATE()),
+    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (found_id) REFERENCES Found_Items(found_id)
+);
