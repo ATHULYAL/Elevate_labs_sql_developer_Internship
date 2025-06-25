@@ -1,0 +1,39 @@
+/* ===== categories ===== */
+INSERT INTO categories (name) VALUES
+  ('Electronics'),
+  ('Accessories'),
+  ('Documents'),
+  ('Clothing'),
+  ('Miscellaneous');
+
+/* ===== users ===== */
+INSERT INTO users (name, email, role) VALUES
+  ('Anjali Menon',  'anjali@example.com', 'student'),
+  ('Rahul Das',  'rahul@example.com',  'student'),
+  ('Maya S',    'maya@example.com',   'staff'),
+  ('Arjun George',  'arjun@example.com',  'student'),
+  ('Divya Philip', 'divya@example.com',  'staff');
+
+/* ===== lost_items ===== */
+INSERT INTO lost_items (user_id, category_id, item_name, description, date_lost, location) VALUES
+  (1, 1, 'Samsung Galaxy Buds', 'Wireless earbuds in black case', '2025-06-10', 'Library'),
+  (2, 4, 'Blue Hoodie',         'Dark blue hoodie with KTU logo', '2025-06-15', 'Cafeteria'),
+  (4, 3, 'Physics Notebook',    'Green spiral notebook with notes','2025-06-18', 'Lecture Hall 3'),
+  (3, 2, 'Ray-Ban Sunglasses',  'Black frame sunglasses',          '2025-06-20', 'Bus Stop'),
+  (5, 5, 'Keychain',            'Bunch of keys with red tag',      '2025-06-22', 'Hostel A');
+
+/* ===== found_items ===== */
+INSERT INTO found_items (user_id, category_id, item_name, description, date_found, location, is_claimed) VALUES
+  (3, 1, 'Silver iPhone 13',  'Found with cracked screen protector', '2025-06-12', 'Auditorium', 0),
+  (5, 2, 'Leather Wallet',    'Brown wallet containing ID cards',    '2025-06-16', 'Cafeteria',  0),
+  (2, 3, 'Driving License',   'Kerala DL in plastic cover',          '2025-06-17', 'Parking Lot',0),
+  (4, 4, 'Umbrella',          'Black foldable umbrella',             '2025-06-19', 'Library',    1),
+  (1, 5, 'USB Pen Drive',     '32 GB blue pen drive',                '2025-06-23', 'Computer Lab',1);
+
+/* ===== claims ===== */
+INSERT INTO claims (user_id, found_id, claim_date, status) VALUES
+  (1, 2, '2025-06-17', 'pending'),
+  (4, 3, '2025-06-18', 'approved'),
+  (2, 1, '2025-06-18', 'rejected'),
+  (5, 4, '2025-06-20', 'approved'),
+  (3, 5, '2025-06-24', 'approved');
